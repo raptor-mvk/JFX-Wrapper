@@ -12,21 +12,23 @@ import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
 public class JFXLabelTest extends GuiTest {
-  private static final String CAPTION = "Test Label";
+  private final String caption = "Test Label";
 
   @Test
-  public void jfxLabel_getNode_returnsCorrectCaptionNode() {
-    Assert.assertNotNull(find(CAPTION));
+  public void constructor_setsCorrectCaption() {
+    Assert.assertNotNull("constructor should set correct caption",
+                            find(caption));
   }
 
   @Test
-  public void jfxLabel_getNode_ReturnsLabel() {
-    Assert.assertTrue(find(CAPTION) instanceof Label);
+  public void getNode_returnsLabel() {
+    Assert.assertTrue("getNode() should return instance of Label",
+                         find(caption) instanceof Label);
   }
 
   @Override
   @NotNull
   protected Parent getRootNode() {
-    return (Parent)new JFXLabel(CAPTION).getNode();
+    return (Parent) new JFXLabel(caption).getNode();
   }
 }
