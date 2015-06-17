@@ -10,8 +10,17 @@ import org.jetbrains.annotations.Nullable;
 import org.loadui.testfx.GuiTest;
 
 abstract class UITest extends GuiTest {
-  @Nullable
+  @NotNull
   final <NodeType extends Node> NodeType findById(@NotNull String id) {
-    return find('#' + id);
+    @Nullable NodeType result = find ('#' + id);
+    if (result == null) {
+      throw new AssertionError("Node #" + id + " was not found");
+    }
+    return result;
+  }
+
+  @NotNull
+  final UITest clickById(@NotNull String id) {
+    return (UITest) click('#' + id);
   }
 }

@@ -4,6 +4,7 @@
 
 package ru.mvk.jfx_wrapper;
 
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import org.jetbrains.annotations.NotNull;
@@ -11,25 +12,29 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
-public class JFXLabelTest extends GuiTest {
+public class JFXLabelTest extends UITest {
   @NotNull
   private final String caption = "Test Label";
+  @NotNull
+  private final String id = "test_label";
 
   @Test
   public void constructor_setsCorrectCaption() {
     Assert.assertNotNull("constructor should set correct caption",
-                            find(caption));
+                            findById(id));
   }
 
   @Test
   public void getNode_returnsLabel() {
     Assert.assertTrue("getNode() should return instance of Label",
-                         find(caption) instanceof Label);
+                         findById(id) instanceof Label);
   }
 
   @Override
   @NotNull
   protected Parent getRootNode() {
-    return (Parent) new JFXLabel(caption).getNode();
+    @NotNull Node node = new JFXLabel(caption).getNode();
+    node.setId(id);
+    return (Parent)node;
   }
 }

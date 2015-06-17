@@ -6,6 +6,7 @@ package ru.mvk.jfx_wrapper;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import org.jetbrains.annotations.NotNull;
@@ -13,9 +14,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
-public class JFXButtonTest extends GuiTest {
+public class JFXButtonTest extends UITest {
   @NotNull
   private final String caption = "Test Button";
+  @NotNull
+  private final String id = "test_button";
   @NotNull
   private JFXButton jfxButton;
   private boolean buttonState;
@@ -26,18 +29,18 @@ public class JFXButtonTest extends GuiTest {
   @Test
   public void constructor_setsCorrectCaption() {
     Assert.assertNotNull("Constructor should set correct caption",
-                            find(caption));
+                            findById(id));
   }
 
   @Test
   public void getNode_returnsButton() {
     Assert.assertTrue("getNode() should return instance of Button",
-                         find(caption) instanceof Button);
+                         findById(id) instanceof Button);
   }
 
   @Test
   public void setDefault_setsUnderlyingButtonAsDefault() {
-    @NotNull Button button = find(caption);
+    @NotNull Button button = findById(id);
     jfxButton.setDefault();
     Assert.assertTrue("setDefault() should set underlying Button as default " +
                           "button", button.isDefaultButton());
@@ -45,7 +48,7 @@ public class JFXButtonTest extends GuiTest {
 
   @Test
   public void setCancel_setsUnderlyingButtonAsCancel() {
-    @NotNull Button button = find(caption);
+    @NotNull Button button = findById(id);
     jfxButton.setCancel();
     Assert.assertTrue("setCancel() should set underlying Button as cancel " +
                           "button", button.isCancelButton());
@@ -55,7 +58,7 @@ public class JFXButtonTest extends GuiTest {
   public void setHandler_setsUnderlyingButtonHandler() {
     buttonState = false;
     jfxButton.setHandler(buttonHandler);
-    click(caption);
+    clickById(id);
     Assert.assertTrue("setHandler() should set underlying Button handler",
                          buttonState);
   }
@@ -64,6 +67,8 @@ public class JFXButtonTest extends GuiTest {
   @NotNull
   protected Parent getRootNode() {
     jfxButton = new JFXButton(caption);
-    return (Parent) jfxButton.getNode();
+    @NotNull Node node = jfxButton.getNode();
+    node.setId(id);
+    return (Parent)node;
   }
 }
