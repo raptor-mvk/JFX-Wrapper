@@ -14,9 +14,12 @@ import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
 public class JFXButtonTest extends GuiTest {
+  @NotNull
   private final String caption = "Test Button";
+  @NotNull
   private JFXButton jfxButton;
   private boolean buttonState;
+  @NotNull
   private final EventHandler<ActionEvent> buttonHandler =
       (event) -> buttonState = !buttonState;
 

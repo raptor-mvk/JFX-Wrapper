@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.loadui.testfx.GuiTest;
 
 public class JFXLabelTest extends GuiTest {
+  @NotNull
   private final String caption = "Test Label";
 
   @Test
