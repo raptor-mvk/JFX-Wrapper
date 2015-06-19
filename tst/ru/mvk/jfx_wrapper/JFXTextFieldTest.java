@@ -22,88 +22,88 @@ public class JFXTextFieldTest extends UITest {
   private JFXTextField jfxTextField;
 
   @Test
-  public void getNode_returnsTextField() {
+  public void getNode_shouldReturnTextField() {
     Assert.assertTrue("getNode() should return instance of TextField",
                          findById(id) instanceof TextField);
   }
 
   @Test
-  public void setValue_setsCorrectValue() {
+  public void setValue_shouldSetTextFieldText() {
     @NotNull TextField textField = findById(id);
     @NotNull String expectedValue = "Test it";
     jfxTextField.setValue(expectedValue);
-    Assert.assertEquals("setValue(s) should set text to s for underlying " +
-                            "TextField", expectedValue, textField.getText());
+    Assert.assertEquals("setValue(s) should set text to s for TextField",
+                           expectedValue, textField.getText());
   }
 
   @Test
-  public void getValue_returnsCorrectValue() {
+  public void getValue_shouldReturnTextFieldText() {
     @NotNull TextField textField = findById(id);
     @NotNull String expectedValue = "Some text";
     textField.setText(expectedValue);
-    Assert.assertEquals("getValue() should return text from underlying " +
-                            "TextField", expectedValue,
-                           jfxTextField.getValue());
-  }
-
-  @Test
-  public void requestFocus_setsFocus() {
-    @NotNull TextField textField = findById(id);
-    JFXUtils.runAndWait(root::requestFocus);
-    JFXUtils.runAndWait(jfxTextField::requestFocus);
-    Assert.assertTrue("requestFocus() should set focus on underlying " +
-                          "TextField", textField.isFocused());
-  }
-
-  @Test
-  public void shortInput_setsWholeText() {
-    @NotNull String inputText = "Test";
-    clickById(id).type(inputText);
-    Assert.assertEquals("short input should set value to whole text",
-                           inputText, jfxTextField.getValue());
-  }
-
-  @Test
-  public void longInput_setsTruncatedText() {
-    @NotNull String inputText = "Very long text";
-    @NotNull String expectedValue = inputText.substring(0, width);
-    clickById(id).type(inputText);
-    Assert.assertEquals("long input should set value to truncated text",
+    Assert.assertEquals("getValue() should return text from TextField",
                            expectedValue, jfxTextField.getValue());
   }
 
   @Test
-  public void shortPasteFromClipboard_setsWholeText() {
+  public void requestFocus_shouldRequestFocusForTextField() {
+    @NotNull TextField textField = findById(id);
+    JFXUtils.runAndWait(root::requestFocus);
+    JFXUtils.runAndWait(jfxTextField::requestFocus);
+    Assert.assertTrue("requestFocus() should set focus on TextField",
+                         textField.isFocused());
+  }
+
+  @Test
+  public void shortInput_shouldPutWholeTextIntoTextField() {
+    @NotNull String inputText = "Test";
+    clickById(id).type(inputText);
+    Assert.assertEquals("short input should put whole text into TextField",
+                           inputText, jfxTextField.getValue());
+  }
+
+  @Test
+  public void longInput_shouldPutTruncatedTextIntoTextField() {
+    @NotNull String inputText = "Very long text";
+    @NotNull String expectedValue = inputText.substring(0, width);
+    clickById(id).type(inputText);
+    Assert.assertEquals("long input should put truncated text into TextField",
+                           expectedValue, jfxTextField.getValue());
+  }
+
+  @Test
+  public void shortPasteFromClipboard_shouldPutWholeTextIntoTextField() {
     @NotNull String inputText = "Clipboard";
     putToClipboard(inputText);
     pasteFromClipboardById(id);
-    Assert.assertEquals("short paste from the clipboard should set value to " +
-                            "whole text", inputText, jfxTextField.getValue());
+    Assert.assertEquals("short paste from the clipboard should put whole " +
+                            "text into TextField", inputText,
+                           jfxTextField.getValue());
   }
 
   @Test
-  public void longPasteFromClipboard_setsEmptyText() {
+  public void longPasteFromClipboard_shouldMakeTextFieldEmpty() {
     @NotNull String inputText = "Boring and pitiful";
     putToClipboard(inputText);
     pasteFromClipboardById(id);
-    Assert.assertEquals("long paste from the clipboard should set empty " +
-                            "value", "", jfxTextField.getValue());
+    Assert.assertEquals("long paste from the clipboard should make TextField " +
+                            "empty", "", jfxTextField.getValue());
   }
 
   @Test
-  public void inputWhenSelectedText_replacesSelectedText() {
+  public void inputWhenSelectedText_shouldReplaceSelectedTextInTextField() {
     @NotNull TextField textField = findById(id);
     @NotNull String expectedValue = "A";
     textField.setText("Selected");
     selectAllById(id);
     type(expectedValue);
     Assert.assertEquals("input when text is selected should replace " +
-                            "selected text", expectedValue,
+                            "selected text in TextField", expectedValue,
                            jfxTextField.getValue());
   }
 
   @Test
-  public void longPasteWhenSelectedText_doesNotChangeText() {
+  public void longPasteWhenSelectedText_shouldNotChangeTextFieldText() {
     @NotNull TextField textField = findById(id);
     @NotNull String expectedValue = "Selected";
     putToClipboard("The longest one");
@@ -116,7 +116,7 @@ public class JFXTextFieldTest extends UITest {
   }
 
   @Test
-  public void inputIntoBeginningOfFilledField_doesNotMoveCaret() {
+  public void inputIntoBeginningOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     textField.setText("Selections");
     type("B");
@@ -125,7 +125,7 @@ public class JFXTextFieldTest extends UITest {
   }
 
   @Test
-  public void inputIntoMiddleOfFilledField_doesNotMoveCaret() {
+  public void inputIntoMiddleOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     int caretPosition = 3;
     textField.setText("Directions");
@@ -137,7 +137,7 @@ public class JFXTextFieldTest extends UITest {
   }
 
   @Test
-  public void inputIntoEndOfFilledField_doesNotMoveCaret() {
+  public void inputIntoEndOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     textField.setText("Projection");
     textField.positionCaret(width);
@@ -147,7 +147,7 @@ public class JFXTextFieldTest extends UITest {
   }
 
   @Test
-  public void pasteIntoBeginningOfFilledField_doesNotMoveCaret() {
+  public void pasteIntoBeginningOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     textField.setText("Hemisphere");
     putToClipboard("Star");
@@ -157,7 +157,7 @@ public class JFXTextFieldTest extends UITest {
   }
 
   @Test
-  public void pasteIntoMiddleOfFilledField_doesNotMoveCaret() {
+  public void pasteIntoMiddleOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     int caretPosition = 6;
     textField.setText("Atmosphere");
@@ -170,7 +170,7 @@ public class JFXTextFieldTest extends UITest {
   }
 
   @Test
-  public void pasteIntoEndOfFilledField_doesNotMoveCaret() {
+  public void pasteIntoEndOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     textField.setText("Protection");
     textField.positionCaret(width);
@@ -181,7 +181,7 @@ public class JFXTextFieldTest extends UITest {
   }
 
   @Test
-  public void longPasteIntoFilledFieldWithSelection_doesNotMoveCaret() {
+  public void longPasteIntoFilledSelectedField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     int caretPosition = 5;
     textField.setText("Destructor");

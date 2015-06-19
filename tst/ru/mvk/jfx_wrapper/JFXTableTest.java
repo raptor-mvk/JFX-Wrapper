@@ -38,16 +38,15 @@ public class JFXTableTest extends UITest {
   public void getColumns_shouldReturnTableViewColumns() {
     @NotNull TableView<TestEntity> tableView = findById(id);
     JFXUtils.runAndWait(() -> tableView.getColumns().addAll(tableColumnList));
-    Assert.assertEquals("getColumns() should return columns from underlying " +
-                            "TableView", tableColumnList,
-                           jfxTable.getColumns());
+    Assert.assertEquals("getColumns() should return columns from TableView",
+                           tableColumnList, jfxTable.getColumns());
   }
 
   @Test
   public void setItems_shouldSetTableViewItems() {
     @NotNull TableView<TestEntity> tableView = findById(id);
     JFXUtils.runAndWait(() -> jfxTable.setItems(entityList));
-    Assert.assertEquals("setItems() should set items for underlying TableView",
+    Assert.assertEquals("setItems() should set items for TableView",
                            entityList, tableView.getItems());
   }
 
@@ -57,7 +56,7 @@ public class JFXTableTest extends UITest {
     @NotNull ObservableList<TestEntity> entityObservableList =
         FXCollections.observableList(entityList);
     JFXUtils.runAndWait(() -> tableView.setItems(entityObservableList));
-    Assert.assertEquals("getItems() should get items from underlying TableView",
+    Assert.assertEquals("getItems() should get items from TableView",
                            entityList, jfxTable.getItems());
   }
 
@@ -72,8 +71,7 @@ public class JFXTableTest extends UITest {
       tableView.getSelectionModel().select(1);
     });
     Assert.assertEquals("getSelectedEntity() should return selected entity " +
-                            "from underlying TableView",
-                           entityList.get(rowToSelect),
+                            "from TableView", entityList.get(rowToSelect),
                            jfxTable.getSelectedEntity());
   }
 

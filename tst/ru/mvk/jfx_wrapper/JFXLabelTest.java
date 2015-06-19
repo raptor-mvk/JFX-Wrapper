@@ -18,13 +18,14 @@ public class JFXLabelTest extends UITest {
   private final String id = "test_label";
 
   @Test
-  public void constructor_setsCorrectCaption() {
-    Assert.assertNotNull("constructor should set correct caption",
-                            findById(id));
+  public void constructor_shouldSetLabelCaption() {
+    @NotNull Label label = findById(id);
+    Assert.assertEquals("constructor should set correct caption for Label",
+                            caption, label.getText());
   }
 
   @Test
-  public void getNode_returnsLabel() {
+  public void getNode_shouldReturnLabel() {
     Assert.assertTrue("getNode() should return instance of Label",
                          findById(id) instanceof Label);
   }

@@ -28,103 +28,102 @@ public class JFXNumFieldTest extends UITest {
   }
 
   @Test
-  public void setValue_setsCorrectValue() {
+  public void setValue_shouldSetTextFieldText() {
     @NotNull TextField textField = findById(id);
     @NotNull String expectedValue = "1234";
     jfxNumField.setValue(expectedValue);
-    Assert.assertEquals("setValue(s) should set text to s for underlying " +
-                            "TextField", expectedValue, textField.getText());
+    Assert.assertEquals("setValue(s) should set text to s for TextField",
+                           expectedValue, textField.getText());
   }
 
   @Test
-  public void getValue_returnsCorrectValue() {
+  public void getValue_shouldReturnTextFieldText() {
     @NotNull TextField textField = findById(id);
     @NotNull String expectedValue = "4575";
     textField.setText(expectedValue);
-    Assert.assertEquals("getValue() should return text from underlying " +
-                            "TextField", expectedValue,
-                           jfxNumField.getValue());
+    Assert.assertEquals("getValue() should return text from TextField",
+                           expectedValue, jfxNumField.getValue());
   }
 
   @Test
-  public void requestFocus_setsFocus() {
+  public void requestFocus_shouldRequestFocusForTextField() {
     @NotNull TextField textField = findById(id);
     JFXUtils.runAndWait(root::requestFocus);
     JFXUtils.runAndWait(jfxNumField::requestFocus);
-    Assert.assertTrue("requestFocus() should set focus on underlying " +
-                          "TextField", textField.isFocused());
+    Assert.assertTrue("requestFocus() should set focus on TextField",
+                         textField.isFocused());
   }
 
   @Test
-  public void shortNumericInput_setsWholeText() {
+  public void shortNumericInput_shouldPutWholeTextIntoTextField() {
     @NotNull String inputText = "254";
     clickById(id).type(inputText);
-    Assert.assertEquals("short numeric input should set value to whole text",
-                           inputText, jfxNumField.getValue());
+    Assert.assertEquals("short numeric input should put whole text into " +
+                            "TextField", inputText, jfxNumField.getValue());
   }
 
   @Test
-  public void shortMixedInput_setsFilteredText() {
+  public void shortMixedInput_shouldPutFilteredTextIntoTextField() {
     @NotNull String inputText = "photo2many5fill4";
     @NotNull String expectedValue = inputText.replaceAll("\\D", "");
     clickById(id).type(inputText);
-    Assert.assertEquals("short mixed input should set value to filtered text",
-                           expectedValue, jfxNumField.getValue());
+    Assert.assertEquals("short mixed input should put filtered text into " +
+                            "TextField", expectedValue, jfxNumField.getValue());
   }
 
   @Test
-  public void longNumericInput_setsTruncatedText() {
+  public void longNumericInput_shouldPutTruncatedTextIntoTextField() {
     @NotNull String inputText = "3473237327";
     @NotNull String expectedValue = inputText.substring(0, width);
     clickById(id).type(inputText);
-    Assert.assertEquals("long numeric input should set value to truncated text",
-                           expectedValue, jfxNumField.getValue());
+    Assert.assertEquals("long numeric input should put truncated text into " +
+                            "TextField", expectedValue, jfxNumField.getValue());
   }
 
   @Test
-  public void longMixedInput_setsFilteredAndTruncatedText() {
+  public void longMixedInput_shouldPutFilteredAndTruncatedTextIntoTextField() {
     @NotNull String inputText = "zeal23factory46triple346";
     @NotNull String expectedValue =
         inputText.replaceAll("\\D", "").substring(0, width);
     clickById(id).type(inputText);
-    Assert.assertEquals("long mixed input should set value to filtered and " +
-                            "truncated text", expectedValue,
+    Assert.assertEquals("long mixed input should put filtered and truncated " +
+                            "text into TextField", expectedValue,
                            jfxNumField.getValue());
   }
 
   @Test
-  public void shortNumericPasteFromClipboard_setsWholeText() {
+  public void shortNumericPasteFromClipboard_shouldPutWholeTextIntoTextField() {
     @NotNull String inputText = "3463";
     putToClipboard(inputText);
     pasteFromClipboardById(id);
-    Assert.assertEquals("short numeric paste from the clipboard should set " +
-                            "value to whole text", inputText,
+    Assert.assertEquals("short numeric paste from the clipboard should put " +
+                            "whole text into TextField", inputText,
                            jfxNumField.getValue());
   }
 
   @Test
-  public void longNumericPasteFromClipboard_setsEmptyText() {
+  public void longNumericPasteFromClipboard_shouldMakeTextFieldEmpty() {
     @NotNull String inputText = "Boring and pitiful";
     putToClipboard(inputText);
     pasteFromClipboardById(id);
-    Assert.assertEquals("long numeric paste from the clipboard should set " +
-                            "empty value", "", jfxNumField.getValue());
+    Assert.assertEquals("long numeric paste from the clipboard should make " +
+                            "TextField empty", "", jfxNumField.getValue());
   }
 
   @Test
-  public void inputWhenSelectedText_replacesSelectedText() {
+  public void inputWhenSelectedText_shouldReplaceTextFieldSelectedText() {
     @NotNull TextField textField = findById(id);
     @NotNull String expectedValue = "7";
     textField.setText("3456");
     selectAllById(id);
     type(expectedValue);
     Assert.assertEquals("input when text is selected should replace " +
-                            "selected text", expectedValue,
+                            "selected text in TextField", expectedValue,
                            jfxNumField.getValue());
   }
 
   @Test
-  public void longPasteWhenSelectedText_doesNotChangeText() {
+  public void longPasteWhenSelectedText_shouldNotChangeTextFieldText() {
     @NotNull TextField textField = findById(id);
     @NotNull String expectedValue = "2346";
     putToClipboard("568468");
@@ -137,7 +136,7 @@ public class JFXNumFieldTest extends UITest {
   }
 
   @Test
-  public void inputIntoBeginningOfFilledField_doesNotMoveCaret() {
+  public void inputIntoBeginningOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     textField.setText("34564");
     type("2");
@@ -146,7 +145,7 @@ public class JFXNumFieldTest extends UITest {
   }
 
   @Test
-  public void inputIntoMiddleOfFilledField_doesNotMoveCaret() {
+  public void inputIntoMiddleOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     int caretPosition = 3;
     textField.setText("54845");
@@ -158,7 +157,7 @@ public class JFXNumFieldTest extends UITest {
   }
 
   @Test
-  public void inputIntoEndOfFilledField_doesNotMoveCaret() {
+  public void inputIntoEndOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     textField.setText("56895");
     textField.positionCaret(width);
@@ -168,7 +167,7 @@ public class JFXNumFieldTest extends UITest {
   }
 
   @Test
-  public void pasteIntoBeginningOfFilledField_doesNotMoveCaret() {
+  public void pasteIntoBeginningOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     textField.setText("45678");
     putToClipboard("3456");
@@ -178,7 +177,7 @@ public class JFXNumFieldTest extends UITest {
   }
 
   @Test
-  public void pasteIntoMiddleOfFilledField_doesNotMoveCaret() {
+  public void pasteIntoMiddleOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     int caretPosition = 2;
     textField.setText("65866");
@@ -191,7 +190,7 @@ public class JFXNumFieldTest extends UITest {
   }
 
   @Test
-  public void pasteIntoEndOfFilledField_doesNotMoveCaret() {
+  public void pasteIntoEndOfFilledField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     textField.setText("56745");
     textField.positionCaret(width);
@@ -202,7 +201,7 @@ public class JFXNumFieldTest extends UITest {
   }
 
   @Test
-  public void longPasteIntoFilledFieldWithSelection_doesNotMoveCaret() {
+  public void longPasteIntoFilledSelectedField_shouldNotMoveTextFieldCaret() {
     @NotNull TextField textField = findById(id);
     int caretPosition = 4;
     textField.setText("95672");

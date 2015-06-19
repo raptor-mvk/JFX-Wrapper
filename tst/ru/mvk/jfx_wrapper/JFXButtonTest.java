@@ -26,40 +26,40 @@ public class JFXButtonTest extends UITest {
       (event) -> buttonState = !buttonState;
 
   @Test
-  public void constructor_setsCorrectCaption() {
-    Assert.assertNotNull("Constructor should set correct caption",
-                            findById(id));
-  }
-
-  @Test
-  public void getNode_returnsButton() {
+  public void getNode_shouldReturnButton() {
     Assert.assertTrue("getNode() should return instance of Button",
                          findById(id) instanceof Button);
   }
 
   @Test
-  public void setDefault_setsUnderlyingButtonAsDefault() {
+  public void constructor_shouldSetButtonCaption() {
+    @NotNull Button button = findById(id);
+    Assert.assertEquals("constructor should set correct caption for Label",
+                           caption, button.getText());
+  }
+
+  @Test
+  public void setDefault_shouldSetButtonAsDefault() {
     @NotNull Button button = findById(id);
     jfxButton.setDefault();
-    Assert.assertTrue("setDefault() should set underlying Button as default " +
-                          "button", button.isDefaultButton());
+    Assert.assertTrue("setDefault() should set Button as default button",
+                         button.isDefaultButton());
   }
 
   @Test
-  public void setCancel_setsUnderlyingButtonAsCancel() {
+  public void setCancel_shouldSetButtonAsCancel() {
     @NotNull Button button = findById(id);
     jfxButton.setCancel();
-    Assert.assertTrue("setCancel() should set underlying Button as cancel " +
-                          "button", button.isCancelButton());
+    Assert.assertTrue("setCancel() should set Button as cancel button",
+                         button.isCancelButton());
   }
 
   @Test
-  public void setHandler_setsUnderlyingButtonHandler() {
+  public void setHandler_shouldSetButtonActionHandler() {
     buttonState = false;
     jfxButton.setHandler(buttonHandler);
     clickById(id);
-    Assert.assertTrue("setHandler() should set underlying Button handler",
-                         buttonState);
+    Assert.assertTrue("setHandler() should set Button handler", buttonState);
   }
 
   @Override

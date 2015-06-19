@@ -25,23 +25,22 @@ public class JFXColumnTest extends UITest {
       new PropertyValueFactory<>("id");
 
   @Test
-  public void constructor_shouldSetCaption() {
-    Assert.assertEquals("constructor should set correct text for " +
-                            "underlying TableColumn", caption,
-                           jfxColumn.getColumn().getText());
+  public void constructor_shouldSetTableColumnCaption() {
+    Assert.assertEquals("constructor should set correct text for TableColumn",
+                           caption, jfxColumn.getColumn().getText());
   }
 
   @Test
-  public void constructor_shouldSetCellValueFactory() {
+  public void constructor_shouldSetTableColumnCellValueFactory() {
     Assert.assertEquals("constructor should set correct cellValueFactory for " +
-                            "underlying TableColumn", cellValueFactory,
+                            "TableColumn", cellValueFactory,
                            jfxColumn.getColumn().getCellValueFactory());
   }
 
   @Test
-  public void constructor_shouldSetSortable() {
-    Assert.assertTrue("constructor should set underlying TableColumn as " +
-                            "sortable", jfxColumn.getColumn().isSortable());
+  public void constructor_shouldMakeTableColumnSortable() {
+    Assert.assertTrue("constructor should make TableColumn sortable",
+                         jfxColumn.getColumn().isSortable());
   }
 
   @Override
