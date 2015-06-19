@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
-import org.loadui.testfx.GuiTest;
 
 public class JFXButtonTest extends UITest {
   @NotNull
@@ -69,6 +68,6 @@ public class JFXButtonTest extends UITest {
     jfxButton = new JFXButton(caption);
     @NotNull Node node = jfxButton.getNode();
     node.setId(id);
-    return (Parent)node;
+    return (Parent) node;
   }
 }

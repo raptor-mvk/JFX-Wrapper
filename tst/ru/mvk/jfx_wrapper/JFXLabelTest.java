@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
-import org.loadui.testfx.GuiTest;
 
 public class JFXLabelTest extends UITest {
   @NotNull
@@ -35,6 +34,6 @@ public class JFXLabelTest extends UITest {
   protected Parent getRootNode() {
     @NotNull Node node = new JFXLabel(caption).getNode();
     node.setId(id);
-    return (Parent)node;
+    return (Parent) node;
   }
 }
