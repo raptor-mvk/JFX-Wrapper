@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact name="JFX-Wrapper:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JFX_Wrapper_jar</output-path>
+    <root id="root">
+      <element id="archive" name="JFX-Wrapper.jar">
+        <element id="module-output" name="JFX-Wrapper" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/lib/annotations.jar" />
+    </root>
+  </artifact>
+</component>

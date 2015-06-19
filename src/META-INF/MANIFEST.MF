@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Sealed: true
+Name: ru/mvk/jfx-wrapper
+Specification-Title: JFX-Wraper
+Specification-Version: 0.1
+Implementation-Title: ru.mvk.jfx-wrapper
+Implementation-Version: 0.1.0
+
+
